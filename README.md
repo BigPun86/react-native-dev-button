@@ -1,6 +1,8 @@
-# react-native-dev-button
+# Simple Dev Button helper
 
 A library to help you manage some dev actions in order to help your dev jobs. I added this to my projects in order to clear the locatal storage where sometimes redux-persist for example fucks or generally to clean up dev junk created by some app crashes etc. Helped me alot :P
+
+The Dev Button will be displayed in the whole app at the desired position and can be used anywhere!
 
 ## Installation
 
@@ -79,6 +81,7 @@ render(){
 
 ## Todo
 
+- add demo []
 - add more todos [] :D
 
 ## Licence

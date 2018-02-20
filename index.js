@@ -39,14 +39,12 @@ export default class DevButton extends PureComponent {
         }
 
         return (
-            <View style={Style.container}>
-                <TouchableOpacity
-                    style={[containerStyle, this.props.styles]}
-                    onPress={this.devActions}
-                >
-                    <View style={[Style.roundShape]} />
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+                style={[containerStyle, this.props.styles]}
+                onPress={this.devActions}
+            >
+                <View style={[Style.roundShape]} />
+            </TouchableOpacity>
         );
     }
 }
