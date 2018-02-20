@@ -12,13 +12,15 @@ export default class DevButton extends PureComponent {
                 }
             }
         ];
-        actions.push(this.props.additionalAction);
+
+        if (this.props.additionalAction.length > 0) {
+            this.props.additionalAction.map((action, index) => {
+                actions.push(action);
+            });
+        }
+
         actions.push({ text: "Cancel" });
-        Alert.alert(
-            "DEV MENU",
-            "Which dev action do you want to trigger?",
-            actions
-        );
+        Alert.alert(this.props.alertTitle, this.props.alertBody, actions);
     };
 
     render() {
@@ -51,6 +53,8 @@ export default class DevButton extends PureComponent {
 
 const PropTypes = require("prop-types");
 DevButton.propTypes = {
+    alertTitle: PropTypes.string,
+    alertBody: PropTypes.string,
     position: PropTypes.oneOf(
         "topLeft",
         "topRight",
@@ -58,12 +62,17 @@ DevButton.propTypes = {
         "bottomRight"
     ),
     clearActions: PropTypes.func,
-    additionalAction: PropTypes.shape({
-        text: PropTypes.string,
-        onPress: PropTypes.func
-    })
+    additionalAction: PropTypes.arrayOf(
+        PropTypes.shape({
+            text: PropTypes.string,
+            onPress: PropTypes.func
+        })
+    )
 };
 DevButton.defaultProps = {
+    alertTitle: "Dev actions",
+    alertBody: "Clear storage or trigger any individually added dev action",
     position: "topLeft",
+    clearActions: () => {},
     additionalAction: {}
 };
