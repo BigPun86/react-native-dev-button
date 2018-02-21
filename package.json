@@ -1,6 +1,6 @@
 {
   "name": "react-native-dev-button",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A library to help to manage some dev actions",
   "main": "index.js",
   "scripts": {
