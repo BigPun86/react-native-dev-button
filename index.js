@@ -3,31 +3,33 @@ import { Alert, AsyncStorage, TouchableOpacity, View } from "react-native";
 import Style from "./styles";
 export default class DevButton extends PureComponent {
     devActions = () => {
-        const actions = [
-            {
-                text: "Clear Storage!",
-                onPress: async () => {
-                    await AsyncStorage.clear();
-                    this.props.clearActions();
+        try {
+            const { additionalActions, alertTitle, alertMessage } = this.props;
+            const actions = [
+                {
+                    text: "Clear Storage!",
+                    onPress: async () => {
+                        await AsyncStorage.clear();
+                        this.props.clearActions();
+                    }
                 }
+            ];
+            if (additionalActions.length > 0) {
+                additionalActions.map((action, index) => {
+                    actions.push(action);
+                });
             }
-        ];
-
-        if (this.props.additionalAction.length > 0) {
-            this.props.additionalAction.map((action, index) => {
-                actions.push(action);
-            });
+            actions.push({ text: "Cancel" });
+            Alert.alert(alertTitle, alertMessage, actions);
+        } catch (error) {
+            console.log(error);
         }
-
-        actions.push({ text: "Cancel" });
-        Alert.alert(this.props.alertTitle, this.props.alertBody, actions);
     };
 
     render() {
         if (!__DEV__) {
             return null;
         }
-
         const { position } = this.props;
         let containerStyle = Style.topContainer;
         if (position) {
@@ -37,7 +39,6 @@ export default class DevButton extends PureComponent {
                 (position === "bottomLeft" && Style.bottomLeftContainer) ||
                 (position === "bottomRight" && Style.bottomRightContainer);
         }
-
         return (
             <TouchableOpacity
                 style={[containerStyle, this.props.styles]}
@@ -52,7 +53,7 @@ export default class DevButton extends PureComponent {
 const PropTypes = require("prop-types");
 DevButton.propTypes = {
     alertTitle: PropTypes.string,
-    alertBody: PropTypes.string,
+    alertMessage: PropTypes.string,
     position: PropTypes.oneOf(
         "topLeft",
         "topRight",
@@ -60,7 +61,7 @@ DevButton.propTypes = {
         "bottomRight"
     ),
     clearActions: PropTypes.func,
-    additionalAction: PropTypes.arrayOf(
+    additionalActions: PropTypes.arrayOf(
         PropTypes.shape({
             text: PropTypes.string,
             onPress: PropTypes.func
@@ -69,8 +70,8 @@ DevButton.propTypes = {
 };
 DevButton.defaultProps = {
     alertTitle: "Dev actions",
-    alertBody: "Clear storage or trigger any individually added dev action",
+    alertMessage: "Clear storage or trigger any individually added dev action",
     position: "topLeft",
     clearActions: () => {},
-    additionalAction: {}
+    additionalActions: {}
 };
