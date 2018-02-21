@@ -1,16 +1,25 @@
 import React, { PureComponent } from "react";
 import { Alert, AsyncStorage, TouchableOpacity, View } from "react-native";
+import Toast from "react-native-simple-toast";
 import Style from "./styles";
 export default class DevButton extends PureComponent {
     devActions = () => {
         try {
-            const { additionalActions, alertTitle, alertMessage } = this.props;
+            const {
+                additionalActions,
+                alertMessage,
+                alertTitle,
+                clearActions
+            } = this.props;
             const actions = [
                 {
                     text: "Clear Storage!",
                     onPress: async () => {
                         await AsyncStorage.clear();
-                        this.props.clearActions();
+                        if (clearActions) {
+                            await clearActions();
+                        }
+                        Toast.show("Cleared AsyncStorage");
                     }
                 }
             ];
@@ -30,7 +39,7 @@ export default class DevButton extends PureComponent {
         if (!__DEV__) {
             return null;
         }
-        const { position } = this.props;
+        const { position, styles } = this.props;
         let containerStyle = Style.topContainer;
         if (position) {
             containerStyle =
@@ -41,7 +50,7 @@ export default class DevButton extends PureComponent {
         }
         return (
             <TouchableOpacity
-                style={[containerStyle, this.props.styles]}
+                style={[containerStyle, styles]}
                 onPress={this.devActions}
             >
                 <View style={[Style.roundShape]} />
@@ -73,5 +82,5 @@ DevButton.defaultProps = {
     alertMessage: "Clear storage or trigger any individually added dev action",
     position: "topLeft",
     clearActions: () => {},
-    additionalActions: {}
+    additionalActions: []
 };

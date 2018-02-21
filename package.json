@@ -23,5 +23,8 @@
     "url": "https://github.com/BigPun86/react-native-dev-button/issues"
   },
   "homepage": "https://github.com/BigPun86/react-native-dev-button#readme",
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "dependencies": {
+    "react-native-simple-toast": "0.0.8"
+  }
 }
