@@ -1,6 +1,6 @@
 # Intro
 
-Simple Dev button menu which will be displayed in the whole app at the desired position and can be used anywhere! I used this in order to clean the AsyncStorage at a certain time of development when i had the feeling that my state tree was somehow doing some weird stuff :P Especially when working with redux and redux-persist this was useful to not get any false data after some hot reloading and/or app crashes. 
+Simple Dev button menu which will be displayed in the whole app at the desired position and can be used anywhere! I used this in order to clean the AsyncStorage at a certain time of development when i had the feeling that my state tree was somehow doing some weird stuff :P Especially when working with redux and redux-persist this was useful to not get any false data after some hot reloading and/or app crashes.
 
 ## Demo
 
@@ -8,27 +8,27 @@ Simple Dev button menu which will be displayed in the whole app at the desired p
 
 ## Installation
 
-`yarn add react-native-dev-button` 
+`yarn add react-native-dev-button`
 
-  **OR**
+**OR**
 
 `npm i react-native-dev-button --save`
 
 ## Parameters
 
-**alertTitle** - text for the alert title 
+**alertTitle** - text for the alert title
 
 **alertMessage** - text for the alert message
 
-**position** - a string which you can pass to define your dev button location. (Default is topLeft corner) *"topLeft" | "topRight" | "bottomLeft" | "bottomRight"*
+**position** - a string which you can pass to define your dev button location. (Default is topLeft corner) _"topLeft" | "topRight" | "bottomLeft" | "bottomRight"_
 
-**clearActions** - You can add here some work which should be done after clearing the AsyncStorage. *(For example reset the navigation to a specific route - See advanced example)*
+**clearActions** - You can add here some work which should be done after clearing the AsyncStorage. _(For example reset the navigation to a specific route - See advanced example)_
 
 **additionalActions** - if you want to add an extra dev action you can pass it here. Just pass an array of Alert-Button objects - [official Alert doc](https://facebook.github.io/react-native/docs/alert.html)
 
 #### Example
 
-*Simple usage example:*
+_Simple usage example:_
 
 ```js
 import DevButton from "react-native-dev-button";
@@ -40,14 +40,14 @@ render(){
 }
 ```
 
-*Some more advanced example with react-navigation:*
+_Some more advanced example with react-navigation:_
 
 ```js
  render() {
     const { dispatch, navigation } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        <KidPickStackNavigator
+        <AppNavigator
           ref={ref => {
             this.navigator = ref;
           }}
@@ -82,13 +82,12 @@ render(){
       </View>
     );
   }
-
 ```
 
 ## Todo
 
-- add demo []
-- add more todos [] :D
+* add demo []
+* add more todos [] :D
 
 ## Licence
 
